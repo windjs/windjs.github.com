@@ -9,16 +9,20 @@
         <lastmod>2012-08-12T12:12:09+08:00</lastmod>
     </url>
     <url>
-        <loc>http://windjs.org/cn/docs/async/async-method.html</loc>
-        <lastmod>2012-08-12T16:47:56+08:00</lastmod>
-    </url>
-    <url>
         <loc>http://windjs.org/cn/docs/async/await.html</loc>
         <lastmod>2012-08-12T16:56:59+08:00</lastmod>
     </url>
     <url>
+        <loc>http://windjs.org/cn/docs/async/cancellation.html</loc>
+        <lastmod>2012-08-12T17:36:57+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://windjs.org/cn/docs/async/</loc>
-        <lastmod>2012-08-12T16:49:00+08:00</lastmod>
+        <lastmod>2012-08-12T17:37:32+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://windjs.org/cn/docs/async/method.html</loc>
+        <lastmod>2012-08-12T16:47:56+08:00</lastmod>
     </url>
     <url>
         <loc>http://windjs.org/cn/docs/async/samples/browser/sorting-animations/</loc>
@@ -32,7 +36,7 @@
     </url>
     <url>
         <loc>http://windjs.org/cn/docs/async/task.html</loc>
-        <lastmod>2012-08-12T17:10:44+08:00</lastmod>
+        <lastmod>2012-08-12T17:24:34+08:00</lastmod>
     </url>
     <url>
         <loc>http://windjs.org/cn/docs/</loc>

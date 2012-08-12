@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Wind.js异步模块：取消模型 - Wind.js</title>
+  <meta name="author" content="老赵">
+
+  
+  <meta name="description" content="Wind.js异步模块：取消模型 Wind.js异步模块索引 引入模块
+异步方法
+$await指令
+任务模型
+取消模型
+绑定其他异步模型
+辅助方法 取消模型 取消操作也是异步编程中十分常见，但也十分麻烦的部分。因此，Wind.js异步模块在任务模型中融入一个简单的取消功能， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://windjs.org/cn/docs/async/cancellation.html">
+  <link href="/cn/favicon.png" rel="icon">
+  <link href="/cn/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/cn/javascripts/modernizr-2.0.js"></script>
+  <script src="/cn/javascripts/ender.js"></script>
+  <script src="/cn/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/cn/atom.xml" rel="alternate" title="Wind.js" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32349745-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/cn/">Wind.js</a></h1>
+  
+    <h2>回归 JavaScript 的异步流程控制</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/cn/atom.xml" rel="subscribe-rss" title="订阅RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:windjs.org/cn" />
+    <input class="search" type="text" name="q" results="0" placeholder="搜索"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/cn/">博客</a></li>
+  <li><a href="/cn/blog/archives/">归档</a></li>
+  <li><a href="/cn/docs/">文档</a></li>
+  <li><a href="https://github.com/JeffreyZhao/wind">源码</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Wind.js异步模块：取消模型</h1>
+    
+  </header>
+  
+  <h2>Wind.js异步模块索引</h2>
+
+<ul>
+<li><a href="./">引入模块</a></li>
+<li><a href="./method.html">异步方法</a></li>
+<li><a href="./await.html">$await指令</a></li>
+<li><a href="./task.html">任务模型</a></li>
+<li><a href="./cancellation.html">取消模型</a></li>
+<li><a href="./binding.html">绑定其他异步模型</a></li>
+<li><a href="./helpers.html">辅助方法</a></li>
+</ul>
+
+
+<h2>取消模型</h2>
+
+<p>取消操作也是异步编程中十分常见，但也十分麻烦的部分。因此，Wind.js异步模块在任务模型中融入一个简单的取消功能，丰富其潜在功能及表现能力。</p>
+
+<p>但是，Wind.js的Task对象上并没有一个类似<code>cancel</code>这样的方法，这点可能会出乎某些人的意料。在实现“取消模型”这个问题上，我们首先必须清楚一点的是：<strong>并非所有的异步操作均可撤销</strong>。有的任务一旦发起，就只能等待其安全结束。因此，我们要做的，应该是“要求取消该任务”，至于任务会如何响应，便由其自身来决定了。在Wind.js的异步模型中，这个“通知机制”便是由<code>Wind.Async.CancellationToken</code>类型（下文也会称作CancellationToken）提供的。</p>
+
+<p>CancellationToken的<code>cancel</code>方法便用于“取消”一个（或一系列）的异步操作。更准确地说，它是将自己标识为“要求取消”并“通知”相关相关的异步任务。这方面的细节将在后续章节中讲解，目前我们先来了解一下Wind.js异步模块中的任务取消模型。如果您要取消一个任务，怎么需要先准备一个CancellationToken对象：</p>
+
+<pre><code>var ct = new Wind.Async.CancellationToken();
+</code></pre>
+
+<p>然后，对于支持取消的异步任务，都会接受一个CancellationToken对象作为参数，并根据其状态来行动。这里我们还是以<a href="./helpers.html">辅助方法</a>中的<code>sleep</code>方法进行说明：</p>
+
+<pre><code>var printEverySecondAsync = eval(Wind.compile("async", function (ct) {
+    var i = 0;
+    while (true) {
+        $await(Wind.Async.sleep(1000, ct));
+        console.log(i++);
+    }
+}));
+
+printEverySecondAsync(ct).start();
+</code></pre>
+
+<p>如果您在浏览器或是Node.js的JavaScript交互式控制台上运行上述代码，将会从0开始，每隔一秒打印一个数字，永不停止，直到有人调用<code>ct.cancel()</code>为止。</p>
+
+<p>在一个Wind.js异步方法中，“取消”的表现形式为“异常”。例如，在<code>ct.cancel()</code>调用之后，上述代码的中的<code>$await(Wind.Async.sleep(1000, ct))</code>语句将会抛出一个<code>Wind.Async.CanceledError</code>错误，我们可以使用<code>try…catch</code>进行捕获：</p>
+
+<pre><code>var ct = new CancellationToken();
+var task = Wind.Async.sleep(5000, ct);
+try {
+    setTimeout(function () { ct.cancel() }, 1000); // 1秒后调用ct.cancel();
+    $await(task);
+} catch (ex) {
+    console.log(CancelledError.isTypeOf(ex)); // true
+    console.log(task.status); // canceled
+}
+</code></pre>
+
+<p>如果某个Task对象抛出了<code>CancelledError</code>错误对象，则它的<code>status</code>字段会返回字符串<code>"canceled"</code>，表明其已被取消。同理，对于一个Wind.js异步方法来说，如果从内部抛出一个未被捕获的<code>CancelledError</code>错误对象，则它的状态也会标识为“已取消”。试想，在很多情况下，我们不会用<code>try…catch</code>来捕获一个<code>$await</code>指令所抛出的异常，于是这个异常会继续顺着“调用栈”继续向调用者传递，于是相关路径上所有的Task对象都会成为<code>canceled</code>状态。这是一个<strong>简单而统一</strong>的模型。</p>
+
+<p>有些情况下我们也需要手动操作CancellationToken对象，向外抛出一个<code>CanceledError</code>错误，以表示当前异步方法已被取消：</p>
+
+<pre><code>if (ct.isCancellationRequested) {
+    throw new Wind.Async.CanceledError();
+}
+</code></pre>
+
+<p>或直接：</p>
+
+<pre><code>ct.throwIfCancellationRequested();
+</code></pre>
+
+<p><code>throwIfCancellationRequested</code>是CancellationToken对象上的辅助方法，其实就是简单地检查<code>isCancellationRequested</code>字段是否为true，并抛出一个<code>CanceledError</code>对象。</p>
+
+<p>有时候我们也需要手动判断<code>isCancellationRequested</code>，因为可能我们需要在取消的时候做一些“收尾工作”，于是便可以：</p>
+
+<pre><code>if (ct.isCancellationRequested) {
+
+    // 做些收尾工作
+
+    throw new Wind.Async.CanceledError();
+}
+</code></pre>
+
+<p>或是：</p>
+
+<pre><code>try {
+    $await(…); // 当任务被取消时
+} catch (ex) {
+    if (CancelledError.isTypeOf(ex)) { // 取消引发的异常
+        // 做些收尾工作
+    }
+
+    throw ex; // 重新抛出异常
+}
+</code></pre>
+
+<p>值得注意的是，由于JavaScript的单线程特性，一般只需在异步方法刚进入的时候，或是某个<code>$await</code>指令之后才会使用<code>isCancellationRequested</code>或是<code>throwIfCancellationRequested</code>。我们没有必要在其他时刻，例如两个<code>$await</code>指令之间反复访问这些成员，因为它们的行为不会发生任何改变。</p>
+
+<h2>Wind.Async.CancellationToken类型详解</h2>
+
+<p>实现任务取消功能时离不开<code>Wind.Async.CancellationToken</code>类型，它有以下成员：</p>
+
+<h3>register(handler)</h3>
+
+<p>该方法用于注册一个取消时的回调方法<code>handler</code>，它会在<code>cancel</code>方法调用时执行。如果<code>cancel</code>已经调用过，则<code>handler</code>会立即执行。</p>
+
+<h3>unregister(handler)</h3>
+
+<p>该方法用于去除取消时的回调方法<code>handler</code>，它是<code>register</code>方法的相反操作。</p>
+
+<h3>cancel()</h3>
+
+<p>该方法用于发出取消请求，调用后会将<code>isCancellationRequested</code>字段设为true，并执行所有已注册的取消回调方法。取消后，所有的回调方法会被释放，CancellationToken对象不会保留对取消回调方法的引用。</p>
+
+<h3>isCancellationRequested</h3>
+
+<p>该字段表示是否已经提出取消请求。</p>
+
+<h3>throwIfCancellationRequested()</h3>
+
+<p>该方法用于在取消请求已经提出的情况下抛出一个<code>isCancellation</code>为true的错误对象。它是一个方便开发者使用的辅助方法，简单等价为：</p>
+
+<pre><code>if (this.isCancellationRequested) {
+    throw new Wind.Async.CancelledError();
+}
+</code></pre>
+
+<p>关于如何将其他异步模型融入Wind.js，使其等到得到<code>$await</code>的眷顾，请参考“<a href="./binding.html">绑定其他异步模型</a>”相关内容。</p>
+
+  
+    <footer>
+      
+      
+    </footer>
+  
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 老赵 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'windjs-cn';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+<link href="/cn/stylesheets/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/cn/javascripts/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>
