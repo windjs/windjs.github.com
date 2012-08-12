@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Wind.js文档 - Wind.js</title>
+  <meta name="author" content="老赵">
+
+  
+  <meta name="description" content="Wind.js文档 Wind.js的前身为Jscex，即JavaScript Computation EXpressions的缩写，它为JavaScript语言提供了一个monadic扩展，能够显著提高一些常见场景下的编程体验（例如异步编程）。Wind.js完全使用JavaScript编写， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://windjs.org/cn/docs/">
+  <link href="/cn/favicon.png" rel="icon">
+  <link href="/cn/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/cn/javascripts/modernizr-2.0.js"></script>
+  <script src="/cn/javascripts/ender.js"></script>
+  <script src="/cn/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/cn/atom.xml" rel="alternate" title="Wind.js" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32349745-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/cn/">Wind.js</a></h1>
+  
+    <h2>回归 JavaScript 的异步流程控制</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/cn/atom.xml" rel="subscribe-rss" title="订阅RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:windjs.org/cn" />
+    <input class="search" type="text" name="q" results="0" placeholder="搜索"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/cn/">博客</a></li>
+  <li><a href="/cn/blog/archives/">归档</a></li>
+  <li><a href="/cn/docs/">文档</a></li>
+  <li><a href="https://github.com/JeffreyZhao/wind">源码</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Wind.js文档</h1>
+    
+  </header>
+  
+  <p>Wind.js的前身为Jscex，即JavaScript Computation EXpressions的缩写，它为JavaScript语言提供了一个monadic扩展，能够显著提高一些常见场景下的编程体验（例如异步编程）。Wind.js完全使用JavaScript编写，能够在任意支持JavaScript的执行引擎里使用，包括各浏览器及服务器端JavaScript环境（例如<a href="http://nodejs.org/">Node.js</a>）。</p>
+
+<p>在异步编程的场景下，代码往往会被各种回调函数拆分地支离破碎，因此大家都会构建<a href="https://github.com/joyent/node/wiki/modules#wiki-async-flow">各式各样的辅助类库</a>来简化开发难度。不过在Wind.js眼中，流程控制本就是语言的职责，只是因为某些限制我们无法使用语言来表达逻辑，于是只能退而求其次地借助于“类库”来解决这方面的问题。开发人员早已熟悉JavaScript中的各式关键字，也已经千百次证明了它们是多么的灵活和简洁，因此在这方面有什么是比JavaScript更为现成的解决方案呢？</p>
+
+<p>Wind.js区别于其他流程控制类库的最大特色，便是纯粹使用JavaScript来表达逻辑，从而避免开发人员学习各种各样缤纷复杂的API。更重要的是，它内置的“运行时动态编译”特性并不会为传统的JavaScript开发带来任何额外的负担。</p>
+
+<h2>Wind.js的特点</h2>
+
+<ul>
+<li>无需学习额外的API或新的语言，直接使用JavaScript语言本身进行编程。</li>
+<li>功能强大的异步任务模型，支持并行，取消等常用异步编程模式，经过多种技术平台验证。</li>
+<li>在任何支持JavaScript语言的环境里直接使用（如浏览器或Node.js），无需额外的编译或转化步骤。</li>
+<li>基础组件及异步运行库共计4K大小（Minified + GZipped），适合开发网页应用。</li>
+</ul>
+
+
+<h2>快速入门</h2>
+
+<p>这部分的两个示例将帮助您快速了解Wind.js的基本优势及使用方式，他们分别在浏览器和Node.js环境下执行，您也可以在Wind.js的GitHub中找到这两个示例的完整代码：</p>
+
+<ul>
+<li><a href="./docs/async/samples/sorting-animations/">排序算法动画</a>：在浏览器中绘制动画，演示排序算法的运行过程。</li>
+<li>博客列表：基于Node.js加载数据，并生成简单的博客列表页面。</li>
+</ul>
+
+
+  
+    <footer>
+      
+      
+    </footer>
+  
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 老赵 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'windjs-cn';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+<link href="/cn/stylesheets/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/cn/javascripts/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>
