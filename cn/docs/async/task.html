@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Wind.js异步模块：任务模型 - Wind.js</title>
+  <meta name="author" content="老赵">
+
+  
+  <meta name="description" content="Wind.js异步模块：任务模型 Wind.js异步模块索引 引入模块
+异步方法
+$await指令
+任务模型
+取消模型
+辅助方法 任务模型 $await指令的参数是Wind.Async.Task类型的对象，这个对象这个对象可以是一个异步方法的返回结果，或是由其他任何方式得到。在Wind. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://windjs.org/cn/docs/async/task.html">
+  <link href="/cn/favicon.png" rel="icon">
+  <link href="/cn/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/cn/javascripts/modernizr-2.0.js"></script>
+  <script src="/cn/javascripts/ender.js"></script>
+  <script src="/cn/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/cn/atom.xml" rel="alternate" title="Wind.js" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32349745-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/cn/">Wind.js</a></h1>
+  
+    <h2>回归 JavaScript 的异步流程控制</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/cn/atom.xml" rel="subscribe-rss" title="订阅RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:windjs.org/cn" />
+    <input class="search" type="text" name="q" results="0" placeholder="搜索"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/cn/">博客</a></li>
+  <li><a href="/cn/blog/archives/">归档</a></li>
+  <li><a href="/cn/docs/">文档</a></li>
+  <li><a href="https://github.com/JeffreyZhao/wind">源码</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Wind.js异步模块：任务模型</h1>
+    
+  </header>
+  
+  <h2>Wind.js异步模块索引</h2>
+
+<ul>
+<li><a href="./">引入模块</a></li>
+<li><a href="./async-method.html">异步方法</a></li>
+<li><a href="./await.html">$await指令</a></li>
+<li><a href="./task.html">任务模型</a></li>
+<li><a href="./cancellation.html">取消模型</a></li>
+<li><a href="./helpers.html">辅助方法</a></li>
+</ul>
+
+
+<h2>任务模型</h2>
+
+<p><code>$await</code>指令的参数是<code>Wind.Async.Task</code>类型的对象，这个对象这个对象可以是一个异步方法的返回结果，或是由其他任何方式得到。在Wind.js异步模块眼中，一个异步任务便是指“<strong>能在未来某个时刻返回的操作</strong>”，它可以是一个<code>setTimeout</code>的绑定（如之前演示过的<code>sleep</code>方法），甚至是一个用户事件：</p>
+
+<pre><code>var btnNext = document.getElementById("btnNext");
+var ev = $await(Wind.Async.onEvent(btnNext, "click"));
+console.write(ev.clientX, ev.clientY);
+</code></pre>
+
+<p>因为在Wind.js看来，用户的点击行为，也是“能在未来某个时刻返回的操作”，这便是一个异步任务。您可以在“<a href="samples/browser/modal-dialog/">模态对话框</a>”以及“<a href="samples/browser/hanoi/">汉诺塔</a>”示例中了解这个模型的威力。</p>
+
+<p>除了上文提到的<code>sleep</code>及<code>onEvent</code>以外，Wind.js异步模块还提供了更多有用的<a href="./helpers.html">辅助方法</a>来应对常见的异步协作问题。例如之前的“并发”执行示例，在实际情况下往往会使用<code>whenAll</code>辅助方法：</p>
+
+<pre><code>var Task = Wind.Async.Task;
+
+var getUserItemsAsync = eval(Wind.compile("async", function (userId) {
+    return $await(Task.whenAll({
+        user: queryUserAsync(userId),
+        items: queryItemsAsync(userId)
+    }));
+});
+</code></pre>
+
+<p><code>whenAll</code>辅助方法会将输入的多个任务包装为一个整体，并同样以Task对象的形式返回。新的Task对象只有在所有输入任务都结束的情况下才会完成，并使用相同的结构（“键值”或“数组”）返回其结果。</p>
+
+<p>Wind.js的异步模型经过C#，F#等多种语言平台的检验，可以说拥有非常灵活而丰富的使用模式。</p>
+
+<h2>Wind.Async.Task类型详解</h2>
+
+<p><code>Wind.Async.Task</code>是Wind.js异步模块内的标准异步模型。异步方法产生的Task对象，除了可以交给<code>$await</code>指令使用之外，也可以直接使用这个对象。这种做法在某些场合十分重要，例如要在系统中逐步引入Wind.js时的情况。</p>
+
+<h3>静态 create(delegate)</h3>
+
+<p>该方法是Task类型上的静态方法，用于创建一个Task对象，多在将普通异步操作绑定为Task的时候使用。</p>
+
+<p>参数<code>delegate</code>方法会在Task启动时（即<code>start</code>方法被调用时）执行，签名为<code>function (t)</code>，其中<code>t</code>即为此次<code>create</code>调用所返回的Task对象。</p>
+
+<p>使用示例：</p>
+
+<pre><code>Task.create(function (t) {
+    console.log(t.status); // running
+});
+</code></pre>
+
+<h3>start()</h3>
+
+<p>该方法用于启动任务，只可调用一次。</p>
+
+<p>使用示例：</p>
+
+<pre><code>var task = someAsyncMethod();
+task.start();
+</code></pre>
+
+<h3>addEventListener(ev, listener)</h3>
+
+<p>该方法用于添加一个事件处理器，只能在Task对象状态为<code>ready</code>或<code>running</code>的时候添加。</p>
+
+<p>参数<code>ev</code>为是以字符串表示的事件名，可以为：</p>
+
+<ul>
+<li><strong>success</strong>：任务执行成功时触发，此时该任务的<code>status</code>字段为<code>succeeded</code>，且<code>result</code>字段为执行结果。</li>
+<li><strong>failure</strong>：任务执行失败时触发，此时该任务的<code>status</code>字段为<code>faulted</code>或<code>canceled</code>（视错误对象的<code>isCancallation</code>字段而定），且<code>error</code>字段为错误对象。</li>
+<li><strong>complete</strong>：无论任务成功还是失败，都会触发该事件。</li>
+</ul>
+
+
+<p>参数<code>listener</code>为事件处理方法，无参数，执行时<code>this</code>为触发事件的Task对象。</p>
+
+<p>使用示例：</p>
+
+<pre><code>var task = someAsyncMethod();
+
+task.addEventListener("success", function () {
+    console.log("Task " + this.id + " is succeeded with result: " + this.result);
+});
+
+task.addEventListener("failure", function (t) {
+    console.log("Task " + this.id + " is failed with error: " + this.error);
+});
+
+task.addEventListener("complete", function (t) {
+    console.log("Task " + this.id + " is completed with status: " + this.status);
+});
+</code></pre>
+
+<h3>removeEventListener(ev, listener)</h3>
+
+<p>该方法用于去除一个事件处理器，提供与<code>addEventListener</code>功能相反的操作。值得注意的是，在<code>complete</code>方法调用之后，Task对象会自动释放对事件处理器，不会继续保持对它们的引用。</p>
+
+<h3>complete(type, value)</h3>
+
+<p>该方法用于通知该Task对象已“完成”（无论结果如何），多在将普通异步操作绑定为Task的时候使用。根据不同情况，参数的值应分别为：</p>
+
+<ul>
+<li><strong>成功</strong>：参数<code>type</code>为<code>"success"</code>，<code>value</code>为任务的执行结果。</li>
+<li><strong>出错</strong>：参数<code>type</code>为<code>"failure"</code>，<code>value</code>为错误对象，其<code>isCancellation</code>字段为<code>false</code>。</li>
+<li><strong>取消</strong>：参数<code>type</code>为<code>"failure"</code>，<code>value</code>为错误对象，其<code>isCancellation</code>字段为<code>true</code>。</li>
+</ul>
+
+
+<p>使用示例：</p>
+
+<pre><code>fs.readFileAsync = function (path) {
+    return Task.create(function (t) {
+        fs.readFile(path, function (err, data) {
+            if (err) {
+                t.complete("failure", err); // 出错
+            } else {
+                t.complete("success", data); // 成功
+            }
+        });
+    });
+}
+</code></pre>
+
+<h3>result</h3>
+
+<p>该字段保存了Task对象执行<strong>成功</strong>后得到的结果，在异步方法内将作为<code>$await</code>指令的返回值。</p>
+
+<h3>error</h3>
+
+<p>该字段保存了Task对象执行失败（<strong>出错</strong>或<strong>取消</strong>）后的错误对象，在异步方法内将作为异常抛出。</p>
+
+<h3>status</h3>
+
+<p>该字段标识Task对象的状态，可分为以下几种情况：</p>
+
+<ul>
+<li><strong>ready</strong>：创建完成，等待启动。</li>
+<li><strong>running</strong>：正在执行。</li>
+<li><strong>succeeded</strong>：执行成功。</li>
+<li><strong>faulted</strong>：执行出错。</li>
+<li><strong>canceled</strong>：执行已取消。</li>
+</ul>
+
+
+<p>可见，Task对象的状态之一为“已取消”，关于这方面的更多信息请参考下一节“<a href="./cancellation.html">取消模型</a>”。</p>
+
+  
+    <footer>
+      
+      
+    </footer>
+  
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 老赵 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'windjs-cn';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+<link href="/cn/stylesheets/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/cn/javascripts/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>

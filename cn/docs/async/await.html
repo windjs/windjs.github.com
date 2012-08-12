@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Wind.js异步模块：$await指令 - Wind.js</title>
+  <meta name="author" content="老赵">
+
+  
+  <meta name="description" content="Wind.js异步模块：$await指令 Wind.js异步模块索引 引入模块
+异步方法
+$await指令
+任务模型
+取消模型
+辅助方法 $await指令 Wind.js函数是标准的JavaScript函数，支持JavaScript语言几乎所有特性：条件判断就用if…else或switch， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://windjs.org/cn/docs/async/await.html">
+  <link href="/cn/favicon.png" rel="icon">
+  <link href="/cn/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/cn/javascripts/modernizr-2.0.js"></script>
+  <script src="/cn/javascripts/ender.js"></script>
+  <script src="/cn/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/cn/atom.xml" rel="alternate" title="Wind.js" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32349745-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/cn/">Wind.js</a></h1>
+  
+    <h2>回归 JavaScript 的异步流程控制</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/cn/atom.xml" rel="subscribe-rss" title="订阅RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:windjs.org/cn" />
+    <input class="search" type="text" name="q" results="0" placeholder="搜索"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/cn/">博客</a></li>
+  <li><a href="/cn/blog/archives/">归档</a></li>
+  <li><a href="/cn/docs/">文档</a></li>
+  <li><a href="https://github.com/JeffreyZhao/wind">源码</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Wind.js异步模块：$await指令</h1>
+    
+  </header>
+  
+  <h2>Wind.js异步模块索引</h2>
+
+<ul>
+<li><a href="./">引入模块</a></li>
+<li><a href="./async-method.html">异步方法</a></li>
+<li><a href="./await.html">$await指令</a></li>
+<li><a href="./task.html">任务模型</a></li>
+<li><a href="./cancellation.html">取消模型</a></li>
+<li><a href="./helpers.html">辅助方法</a></li>
+</ul>
+
+
+<h2>$await指令</h2>
+
+<p>Wind.js函数是标准的JavaScript函数，支持JavaScript语言几乎所有特性：条件判断就用<code>if…else</code>或<code>switch</code>，错误捕获就用<code>try…catch…finally</code>，循环就用<code>while</code>、<code>for</code>、<code>do</code>，其他包括<code>break</code>，<code>continue</code>，<code>return</code>等等，都是最普通的JavaScript写法，而在Wind.js异步方法中，唯一新增的便是<code>$await</code>指令。</p>
+
+<p><code>$await</code>指令的使用形式便是普通的方法调用，但事实上在上下文中并没有这个方法。它的作用与<code>eval(Wind.compile("async", …))</code>一样，仅仅是个占位符，让Wind.js知道在这个地方需要进行“特殊处理”。</p>
+
+<p><code>$await</code>指令的参数只有一个，便是一个<code>Wind.Async.Task</code>类型的对象，这个对象可以是一个异步方法的返回结果，或是以其他任何方式得到。例如<a href="./helpers.html">辅助方法</a>中的<code>Wind.Async.sleep(1000)</code>，便是返回一个表示“等待1秒钟”的Task对象。因此这句代码：</p>
+
+<pre><code>$await(Jscex.Async.sleep(1000));
+</code></pre>
+
+<p>在需要时也可以分开写作：</p>
+
+<pre><code>var task = Jscex.Async.sleep(1000);
+$await(task)
+</code></pre>
+
+<p><code>$await</code>指令的确切语义是：“<strong>等待该Task对象结束（返回结果或抛出错误）；如果它尚未启动，则启动该任务；如果已经完成，则立即返回结果（或抛出错误）</strong>”。因此，我们也可以在需要的时候灵活使用<code>$await</code>指令。例如在一个Node.js应用程序中，时常会实现下面的逻辑：</p>
+
+<pre><code>var getUserItemsAsync = eval(Jscex.compile("async", function (userId) {
+
+    var user = $await(queryUserAsync(userId));
+    var items = $await(queryItemsAsync(userId));
+
+    return {
+        user: user,
+        items: items
+    };
+});
+</code></pre>
+
+<p>在上面的代码中，<code>queryUserAsync</code>与<code>queryItemsAsync</code>是依次执行的，如果前者耗时200毫秒，后者耗时300毫秒，则总共需要500毫秒才能完成。但是，在某些情况下，我们可以让两个操作“并发”执行，例如：</p>
+
+<pre><code>var getUserItemsAsync = eval(Jscex.compile("async", function (userId) {
+
+    var queryUserTask = queryUserAsync(userId);
+
+    // 手动启动queryUserAsync任务，start方法调用将立即返回。
+    queryUserTask.start();
+
+    var items = $await(queryItemsAsync(userId));
+    var user = $await(queryUserTask); // 等待之前的任务完成
+
+    return {
+        user: user,
+        items: items
+    };
+});
+</code></pre>
+
+<p>在<code>$await(queryUserTask)</code>时，如果该任务已经完成，则会立即返回结果，否则便会等待其完成。因此，当这两个互不依赖的查询操作并发执行的情况下，总耗时将会减少到300毫秒。不过，在实际情况下假如要并行两个异步操作，往往会使用<code>whenAll</code>辅助方法。</p>
+
+<p>关于<code>Wind.Async.Task</code>类型的详细信息，可参考下一节“<a href="./task.html">任务模型</a>”相关内容。</p>
+
+  
+    <footer>
+      
+      
+    </footer>
+  
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 老赵 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'windjs-cn';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+<link href="/cn/stylesheets/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/cn/javascripts/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>

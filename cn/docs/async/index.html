@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Wind.js异步模块 - Wind.js</title>
+  <meta name="author" content="老赵">
+
+  
+  <meta name="description" content="Wind.js异步模块 Wind.js异步模块索引 引入模块
+异步方法
+$await指令
+任务模型
+取消模型
+辅助方法 引入模块 Wind.js可以在各种JavaScript的执行环境中使用。 浏览器 在浏览器里使用Wind.js异步模块时，只需引入bin/dev目录下的相关文件即可： &lt; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://windjs.org/cn/docs/async/">
+  <link href="/cn/favicon.png" rel="icon">
+  <link href="/cn/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/cn/javascripts/modernizr-2.0.js"></script>
+  <script src="/cn/javascripts/ender.js"></script>
+  <script src="/cn/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/cn/atom.xml" rel="alternate" title="Wind.js" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32349745-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/cn/">Wind.js</a></h1>
+  
+    <h2>回归 JavaScript 的异步流程控制</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/cn/atom.xml" rel="subscribe-rss" title="订阅RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:windjs.org/cn" />
+    <input class="search" type="text" name="q" results="0" placeholder="搜索"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/cn/">博客</a></li>
+  <li><a href="/cn/blog/archives/">归档</a></li>
+  <li><a href="/cn/docs/">文档</a></li>
+  <li><a href="https://github.com/JeffreyZhao/wind">源码</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Wind.js异步模块</h1>
+    
+  </header>
+  
+  <h2>Wind.js异步模块索引</h2>
+
+<ul>
+<li><a href="./">引入模块</a></li>
+<li><a href="./async-method.html">异步方法</a></li>
+<li><a href="./await.html">$await指令</a></li>
+<li><a href="./task.html">任务模型</a></li>
+<li><a href="./cancellation.html">取消模型</a></li>
+<li><a href="./helpers.html">辅助方法</a></li>
+</ul>
+
+
+<h2>引入模块</h2>
+
+<p>Wind.js可以在各种JavaScript的执行环境中使用。</p>
+
+<h3>浏览器</h3>
+
+<p>在浏览器里使用Wind.js异步模块时，只需引入<a href="https://github.com/JeffreyZhao/wind/tree/master/bin/dev">bin/dev</a>目录下的相关文件即可：</p>
+
+<pre><code>&lt;script src="wind-core-x.y.z.js"&gt;&lt;/script&gt;
+&lt;script src="wind-compiler-x.y.z.js"&gt;&lt;/script&gt;
+&lt;script src="wind-builderbase-x.y.z.js"&gt;&lt;/script&gt;
+&lt;script src="wind-async-x.y.z.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>此时将会在浏览器根上创建一个名为<code>Wind</code>的对象。而在生产环境里部署时，建议在<a href="/cn/docs/aot/">预编译</a>后去除体积最为庞大的compiler模块。更多内容请参考<a href="/cn/docs/importing/">模块引入相关文档</a>。</p>
+
+<h3>Node.js</h3>
+
+<p>在Node.js里使用Wind.js异步模块时，只需使用npm安装wind包，其中包含了Wind.js开发中所需的所有模块。：</p>
+
+<pre><code>npm install wind
+</code></pre>
+
+<p>并在需要时使用<code>require</code>引入即可：</p>
+
+<pre><code>var Wind = require("wind");
+</code></pre>
+
+<p>在Wind.js使用过程中，必须保证在上下文环境中有一个名为<code>Wind</code>的根对象。</p>
+
+<h3>其他环境</h3>
+
+<p>Wind.js还支持AMD等包加载环境，更多内容请参考<a href="/cn/docs/importing/">模块引入相关文档</a>。</p>
+
+<p>加载Wind.js异步模块之后，便可以定义并使用“<a href="./async-method.html">异步方法</a>”了。</p>
+
+  
+    <footer>
+      
+      
+    </footer>
+  
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 老赵 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'windjs-cn';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+<link href="/cn/stylesheets/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/cn/javascripts/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>

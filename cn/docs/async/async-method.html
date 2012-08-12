@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Wind.js异步模块：异步方法 - Wind.js</title>
+  <meta name="author" content="老赵">
+
+  
+  <meta name="description" content="Wind.js异步模块：异步方法 Wind.js异步模块索引 引入模块
+异步方法
+$await指令
+任务模型
+取消模型
+辅助方法 定义异步方法 在JavaScript里定义一个普通方法很容易，例如： var print = function (text) { console.log(text &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://windjs.org/cn/docs/async/async-method.html">
+  <link href="/cn/favicon.png" rel="icon">
+  <link href="/cn/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/cn/javascripts/modernizr-2.0.js"></script>
+  <script src="/cn/javascripts/ender.js"></script>
+  <script src="/cn/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/cn/atom.xml" rel="alternate" title="Wind.js" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32349745-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="no-sidebar"  >
+  <header role="banner"><hgroup>
+  <h1><a href="/cn/">Wind.js</a></h1>
+  
+    <h2>回归 JavaScript 的异步流程控制</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/cn/atom.xml" rel="subscribe-rss" title="订阅RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:windjs.org/cn" />
+    <input class="search" type="text" name="q" results="0" placeholder="搜索"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/cn/">博客</a></li>
+  <li><a href="/cn/blog/archives/">归档</a></li>
+  <li><a href="/cn/docs/">文档</a></li>
+  <li><a href="https://github.com/JeffreyZhao/wind">源码</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Wind.js异步模块：异步方法</h1>
+    
+  </header>
+  
+  <h2>Wind.js异步模块索引</h2>
+
+<ul>
+<li><a href="./">引入模块</a></li>
+<li><a href="./async-method.html">异步方法</a></li>
+<li><a href="./await.html">$await指令</a></li>
+<li><a href="./task.html">任务模型</a></li>
+<li><a href="./cancellation.html">取消模型</a></li>
+<li><a href="./helpers.html">辅助方法</a></li>
+</ul>
+
+
+<h2>定义异步方法</h2>
+
+<p>在JavaScript里定义一个普通方法很容易，例如：</p>
+
+<pre><code>var print = function (text) {
+    console.log(text);
+}
+</code></pre>
+
+<p>而创建一个Wind.js里的“异步方法”，其实就是使用“异步构造器”（即<code>"async"</code>）来创建一个Wind.js方法，即：</p>
+
+<pre><code>var printAsync = eval(Wind.compile("async", function (text) {
+    console.log(text);
+}));
+</code></pre>
+
+<p>其中<code>eval(Wind.compile("async", …))</code>部分只是一个包装，一种标识，让程序员可以清楚的意识到这不是一个普通方法。在使用Wind.js的时候，我们不会在其他任何地方，其他任何一种方式使用<code>eval</code>或是<code>Wind.compile</code>，完全不会表现出其“邪恶”的一面，更不会出现在生产环境中。</p>
+
+<h2>使用异步方法</h2>
+
+<h3>直接使用</h3>
+
+<p>与普通使用不同的是，异步方法在执行后并不会立即启动方法体内的代码，而是会返回一个<code>Wind.Async.Task</code>类型的对象（后文也会称做“任务对象”或是Task对象）：</p>
+
+<pre><code>// 输出“Hello World”
+print("Hello World");
+
+// 得到Wind.Async.Task对象
+var task = printAsync("Hello World");
+</code></pre>
+
+<p>如果要启动这个task对象，只需调用其<code>start()</code>方法即可：</p>
+
+<pre><code>task.start(); // 输出“Hello World”
+</code></pre>
+
+<p>关于<code>Wind.Async.Task</code>类型成员及其功能，请参考<a href="./task.html">任务模型</a>相关内容。任何一个Wind.js异步方法，都可以使用<code>start()</code>方法启动，无需依赖其他异步方法（见下节）。这点经常被人忽略，但对于那些需要将Wind.js与普通代码配合使用的场景十分重要。</p>
+
+<h3>在其他异步方法内使用</h3>
+
+<p>对于一个Wind异步方法返回的Task对象来说，最常见的使用方式便是在另一个异步方法内，通过<code>$await</code>命令来执行并等待其结束。例如：</p>
+
+<pre><code>var printAllAsync = eval(Wind.compile("async", function (texts) {
+    for (var i = 0; i &lt; texts.length; i++) {
+        $await(printAsync(texts[i])); // 使用$await命令执行一个Task对象
+    }
+}));
+</code></pre>
+
+<p>当然，对于这里的<code>printAsync</code>方法来说，由于其内部并没有其他异步操作（您可以简单的理解为“没有<code>$await</code>命令”），因此它所返回的Task对象，其执行效果和普通的<code>print</code>方法没有什么区别。但是在实际使用时，我们使用的是更有意义的异步操作，例如各式<a href="./helpers.html">辅助方法</a>中的<code>Wind.Async.sleep</code>方法：</p>
+
+<pre><code>var printEverySecond = eval(Wind.compile("async", function (texts) {
+    for (var i = 0; i &lt; texts.length; i++) {
+        $await(Wind.Async.sleep(1000)); // “暂停”一秒
+        console.log(text[i]);
+    }
+}));
+</code></pre>
+
+<p>我们知道，JavaScript环境并没有提供“暂停”或是“阻塞”一段时间这样的方法，唯一能提供“延迟执行”功能的只有<code>setTimeout</code>。而<code>setTimeout</code>只能做到在一段时间后执行一个回调方法，因此便无法在一个使用JavaScript中的<code>for</code>或是<code>while</code>关键字来实现循环，也无法靠<code>try…catch</code>来捕获到回调函数出错时抛出的异常。</p>
+
+<p>而在Wind.js异步方法中，这一切都不是问题。<code>$await</code>将为您保证异步操作的执行顺序，您可以使用最传统的编程方式来表达算法，由Wind.js来帮您搞定异步操作的各种问题。关于<code>$await</code>的详细语义，请参考“<a href="./await.html">$await指令</a>”相关内容。</p>
+
+  
+    <footer>
+      
+      
+    </footer>
+  
+</article>
+
+</div>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - 老赵 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'windjs-cn';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+<link href="/cn/stylesheets/solarized_dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+<script src="/cn/javascripts/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>
