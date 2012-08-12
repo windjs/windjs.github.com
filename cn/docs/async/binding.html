@@ -116,16 +116,16 @@ $await指令
 
 <p>例如在Node.js中<a href="http://nodejs.org/api/fs.html#fs_fs_exists_path_callback">File System模块的exists方法</a>，便是一个十分简单的异步操作，它会将结果通过回调函数返回：</p>
 
-<pre><code>path.exists('/etc/passwd', function (exists) {
+<pre><code>fs.exists('/etc/passwd', function (exists) {
     util.debug(exists ? "it's there" : "no passwd!");
 });
 </code></pre>
 
 <p>但如果我们要在Wind.js异步方法里使用这个函数，则需要将其进行简单绑定：</p>
 
-<pre><code>path.existsAsync = function (p) {
+<pre><code>fs.existsAsync = function (p) {
     return Task.create(function (t) {
-        path.exists(p, function (exists) {
+        fs.exists(p, function (exists) {
             t.complete("success", exists);
         });
     });
@@ -135,7 +135,7 @@ $await指令
 <p>于是<code>existsAsync</code>就会返回一个Task对象，它在<code>start</code>以后，便会调用原来的<code>exists</code>方法获得结果。我们也可以将其用在某个Wind.js异步方法中：</p>
 
 <pre><code>// 某Wind.js异步方法内
-var exists = $await(path.existsAsync("/etc/passwd"));
+var exists = $await(fs.existsAsync("/etc/passwd"));
 util.debug(exists ? "it's there" : "no passwd!");
 </code></pre>
 
@@ -301,7 +301,7 @@ fs.readAsync = Binding.fromStandard(fs.read, "bytesRead", "buffer");
 fs.writeAsync = Binding.fromStandard(fs.write, "written", "buffer");
 </code></pre>
 
-<p>这便是JavaScript语言的威力。更多内容请参考下一节“<a href="./helpers.html">辅助方法</a>”。</p>
+<p>这便是JavaScript语言的威力。更多相关内容请参考下一节“<a href="./helpers.html">辅助方法</a>”。</p>
 
   
     <footer>

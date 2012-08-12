@@ -14,11 +14,15 @@
     </url>
     <url>
         <loc>http://windjs.org/cn/docs/async/binding.html</loc>
-        <lastmod>2012-08-12T18:11:47+08:00</lastmod>
+        <lastmod>2012-08-12T20:09:08+08:00</lastmod>
     </url>
     <url>
         <loc>http://windjs.org/cn/docs/async/cancellation.html</loc>
         <lastmod>2012-08-12T17:42:30+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://windjs.org/cn/docs/async/helpers.html</loc>
+        <lastmod>2012-08-12T20:13:05+08:00</lastmod>
     </url>
     <url>
         <loc>http://windjs.org/cn/docs/async/</loc>
@@ -43,8 +47,24 @@
         <lastmod>2012-08-12T17:24:34+08:00</lastmod>
     </url>
     <url>
+        <loc>http://windjs.org/cn/docs/builderbase/</loc>
+        <lastmod>2012-08-12T20:34:08+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://windjs.org/cn/docs/compiler/</loc>
+        <lastmod>2012-08-12T20:32:09+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://windjs.org/cn/docs/core/</loc>
+        <lastmod>2012-08-12T20:33:14+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://windjs.org/cn/docs/</loc>
-        <lastmod>2012-08-12T15:23:04+08:00</lastmod>
+        <lastmod>2012-08-12T20:32:57+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://windjs.org/cn/docs/promise/</loc>
+        <lastmod>2012-08-12T20:31:57+08:00</lastmod>
     </url>
     <url>
         <loc>http://windjs.org/cn/</loc>
