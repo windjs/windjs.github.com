@@ -4,7 +4,7 @@
   <title><![CDATA[Wind.js]]></title>
   <link href="http://windjs.org/cn/atom.xml" rel="self"/>
   <link href="http://windjs.org/cn/"/>
-  <updated>2012-08-12T20:48:59+08:00</updated>
+  <updated>2012-08-12T23:09:13+08:00</updated>
   <id>http://windjs.org/cn/</id>
   <author>
     <name><![CDATA[老赵]]></name>
@@ -12,6 +12,94 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Wind.js 0.7.0版本发布]]></title>
+    <link href="http://windjs.org/cn/blog/2012/07/windjs-0.7.0-release/"/>
+    <updated>2012-07-28T22:01:00+08:00</updated>
+    <id>http://windjs.org/cn/blog/2012/07/windjs-0.7.0-release</id>
+    <content type="html"><![CDATA[<p>经过<a href="https://github.com/JeffreyZhao/wind/issues?milestone=5&amp;page=1&amp;sort=updated&amp;state=closed">周末整整两天的努力</a>，Wind.js 0.7.0版本终于正式发布了！这次发布最重要的改进，便是类库的名称从Jscex修改为Wind.js，搭建了博客，并启用了新的网站和域名。此外，还修复了一些Bug，添加了更多的单元测试，并吸取了一部分<a href="https://github.com/JeffreyZhao/wind/issues/51">玉伯的建议</a>简化了项目的使用方式。</p>
+
+<!-- more -->
+
+
+<h2>关于jscex.org域名</h2>
+
+<p>之前Jscex项目使用的是jscex.info作为官方网站。上周玉伯为Jscex提出了一些建议，提到应该尽量使用org域名，这是开源项目的标配。其实我也想，只可惜jscex.org域名已经被他人所有。不过经玉伯这么一提起，我就打算试着去买回jscex.org域名。我尝试在<a href="http://www.sedo.com/">Sedo</a>上向jscex.org的所有者提出了购买申请。</p>
+
+<p>我开价100美金。其实按我最初的想法，Jscex这个名称除了我这个项目之外，应该无人在意才对，应该不该花多少钱。没想到的是对方很快就有所回应，要价1000美金。于是我逐步加到200美金，但对方死咬住800美金不松口，我只得取消交易。有趣的是，过了不久我收到对方的邮件，把价格降低到679美金，最后又提出了479美金的“超低价”。他在邮件里的说法是：</p>
+
+<blockquote><p><strong>$479</strong> This is last chance.</p></blockquote>
+
+<p>这顿时让我有了一丝特别的感觉。因为对于一个英语国家的人，他一定会说“This is <strong>the</strong> last chance”，这里加上一个定冠词“the”才显得十分自然。之前我在微博上也提到我为jscex.org准备了500美金的预算，而此时我也已经放弃购买域名，并开始在微博上征集项目的新名字，但价格却突然降低至我的预算范围内。再加上那时已经是下午，但邮件回复依然十分迅速，除了说明对方与我的工作时区接近之外，似乎对方也非常想卖出这个域名。</p>
+
+<p>同时，根据<a href="http://www.whois.net/whois/jscex.org">Whois上查询的结果</a>，这个域名直到去年10月才被注册，那时候Jscex项目已经对外公开了相当长的时间，所以我认为这是在故意抢注想敲我一笔的可能性很大。这样更坚定了我项目改名的决心。</p>
+
+<p>可以这么认为：jscex.org域名被抢注</p>
+
+<h2>新名字Wind.js</h2>
+
+<p>对于新名字我始终把握不定。一开始我考虑到Jscex的读音是“J-Sex”，这导致我也曾经以“性感的JavaScript”来宣传Jscex类库，因此顺水推舟改名为SexJS或是SexyJS似乎也是件挺有趣的事情。但是后来我感觉这名字似乎过于哗众取宠，容易引起反感，于是作罢。</p>
+
+<p>由于Jscex是一个流程控制（Flow Control）类库，因此我一直想围绕Flow这个词做文章。后来想到过Flowless这个名字，但是在注册了flowless.org域名之后，却悲催地发现<a href="http://npmjs.org/package/flowless">NPM上已经有了同名的类库</a>。后来也考虑过FancyFlow，Wonderflow，又从Flow联想到水流和气流，继而注册了WaterJS.org，AirJS.org，AirflowJS.org等域名，还有比较“通用”的MagicJS.org等等，但最终决定使用WindJS.org作为域名，项目名便取做Wind.js。假如您需要以上这些域名干些正事，请随时跟我联系，我可以免费转让给您。</p>
+
+<p>从Flow联想到Wind自然不必解释，选择Wind.js的一个重要原因，便是它似乎还较为容易搜索出来。我曾经也考虑过Air.js，但是发现已经有了Adobe Air这个与JavaScript关系相对较为紧密的东西，再取名叫做Air.js就会稍显不利。而Wind.js除了识别度较高之外，也显得比Air更有气势一些，四个字符看上去也长短适中。从周四晚确定了Wind.js到现在，我对这个名字的满意度越来越高。</p>
+
+<p>我甚至连Logo都已经想好了：就画上一阵风，吹得<code>callback</code>及<code>state</code>这种东西团团转吧！</p>
+
+<h2>Wind.js 0.7.0版本的改进</h2>
+
+<p>既然项目名称从Jscex修改为Wind，因此原本的根对象名也自然从<code>Jscex</code>变成了<code>Wind</code>。除了改名之外，Wind.js 0.7.0还在使用上做了部分简化，这主要是采纳了玉伯的建议。</p>
+
+<p>首先，我减少了Wind.js中模块的数量。JavaScript语言缺少一个统一模块机制，因此传统开发过程中的“模块化”实践会引起使用上的不便，这是一个相当严重的副作用。于是在Wind.js 0.7.0中：</p>
+
+<ul>
+<li>jscex-parser和jscex-jit合并为wind-compiler模块，因为对用户来说几乎没有独立使用解析器模块的需求。</li>
+<li>jscex-async和jscex-async-powerpack合并为wind-async模块，因为考虑到异步增强模块本身也只有很小的体积，还不如并入异步模块来换取易用性。</li>
+</ul>
+
+
+<p>此外，jscex模块也改名为wind-core，突出其“核心”模块的本质。于是，原本使用Jscex 0.6.5异步模块时需要引入6个模块：</p>
+
+<pre><code>&lt;script src="jscex-x.y.z.js"&gt;&lt;/script&gt;
+&lt;script src="jscex-parser-x.y.z.js"&gt;&lt;/script&gt;
+&lt;script src="jscex-jit-x.y.z.js"&gt;&lt;/script&gt;
+&lt;script src="jscex-builderbase-x.y.z.js"&gt;&lt;/script&gt;
+&lt;script src="jscex-async-x.y.z.js"&gt;&lt;/script&gt;
+&lt;script src="jscex-async-powerpack-x.y.z.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>到了Wind.js 0.7.0中则只需引入4个模块即可：</p>
+
+<pre><code>&lt;script src="wind-core-x.y.z.js"&gt;&lt;/script&gt;
+&lt;script src="wind-compiler-x.y.z.js"&gt;&lt;/script&gt;
+&lt;script src="wind-builderbase-x.y.z.js"&gt;&lt;/script&gt;
+&lt;script src="wind-async-x.y.z.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>而对于Node.js环境中，使用Wind.js更只需安装一个包即可：</p>
+
+<pre><code>npm install wind
+</code></pre>
+
+<p>在使用时也只需<code>require</code>一个包即可：</p>
+
+<pre><code>var Wind = require("wind");
+</code></pre>
+
+<p>本来“模块化”的目标，是为了在浏览器中有选择性地使用模块以减小脚本加载体积。然而，对于Node.js来说包的体积完全不是问题，还不如直接发布一个包含了所有模块的大包，让开发人员可以毫不费力地使用Wind.js的所有功能。</p>
+
+<h2>新的项目官方站点</h2>
+
+<p>您肯定也已经发现Wind.js新上线官方站点。这个站点使用<a href="http://octopress.org/">Octopress</a>搭建，比旧站点使用的<a href="https://github.com/bevry/docpad">DocPad</a>强大许多。更重要的是，它自带了一个至少在我看来十分美观的皮肤，我将其简单的本地化之后便可以直接用上了，甚至它还附赠一个博客系统，支持使用<a href="http://disqus.com/">Disqus</a>发表评论。这样Wind.js便有了自己的项目博客，发布新闻或是搞各种活动便无需借助<a href="http://blog.zhaojie.me/">我的个人博客</a>，一切都显得正式了许多。</p>
+
+<p>今天我一整天都在进行文案工作，重写<a href="http://windjs.org/cn/docs/">文档首页</a>，并迁移了完整的<a href="http://windjs.org/cn/docs/async/">异步模块代码</a>，将之前的一大篇文档分拆了几个小部分，希望能够进一步方便阅读。</p>
+
+<h2>反馈</h2>
+
+<p>假如您在Wind.js使用过程中产生任何疑问或是意见建议，请加入<a href="https://groups.google.com/d/forum/windjs">Wind.js讨论组</a>参与讨论，或直接发送邮件至<a href="mailto:windjs@googlegroups.com">邮件列表</a>。对于使用过程中发现的Bug，也可以<a href="https://github.com/JeffreyZhao/wind/issues">汇报至GitHub</a>。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[专访Wind.js作者老赵（上）：缘由、思路及发展]]></title>
