@@ -4,7 +4,7 @@
   <title><![CDATA[Wind.js]]></title>
   <link href="http://windjs.org/cn/atom.xml" rel="self"/>
   <link href="http://windjs.org/cn/"/>
-  <updated>2012-08-13T08:54:01+08:00</updated>
+  <updated>2012-08-13T21:21:34+08:00</updated>
   <id>http://windjs.org/cn/</id>
   <author>
     <name><![CDATA[老赵]]></name>
@@ -35,7 +35,7 @@
 
 <p>同时，根据<a href="http://www.whois.net/whois/jscex.org">Whois上查询的结果</a>，这个域名直到去年10月才被注册，那时候Jscex项目已经对外公开了相当长的时间，所以我认为这是在故意抢注想敲我一笔的可能性很大。这样更坚定了我项目改名的决心。</p>
 
-<p>可以这么认为：jscex.org域名被抢注</p>
+<p>当然，Jscex这个名字本身也存在难读难记等问题。可以这么认为：jscex.org域名被抢注是导致项目改名的“最后一根稻草”。</p>
 
 <h2>新名字Wind.js</h2>
 
@@ -222,7 +222,7 @@ for (var i = 0; iter.current &lt; i++; iter.moveNext()) {
     var content = $await(read(src, content));
     console.log("内容读取成功");
     $await(write(target, content));
-    console.log("内容读取成功");
+    console.log("内容写入成功");
 } catch (ex) {
     $await(submitError(ex));
     console.log("错误提交成功");

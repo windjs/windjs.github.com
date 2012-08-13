@@ -220,7 +220,7 @@ for (var i = 0; iter.current &lt; i++; iter.moveNext()) {
     var content = $await(read(src, content));
     console.log("内容读取成功");
     $await(write(target, content));
-    console.log("内容读取成功");
+    console.log("内容写入成功");
 } catch (ex) {
     $await(submitError(ex));
     console.log("错误提交成功");

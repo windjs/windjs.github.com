@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 访谈 | Wind.js]]></title>
   <link href="http://windjs.org/cn/blog/categories/访谈/atom.xml" rel="self"/>
   <link href="http://windjs.org/cn/"/>
-  <updated>2012-08-13T08:54:01+08:00</updated>
+  <updated>2012-08-13T21:21:34+08:00</updated>
   <id>http://windjs.org/cn/</id>
   <author>
     <name><![CDATA[老赵]]></name>
@@ -134,7 +134,7 @@ for (var i = 0; iter.current &lt; i++; iter.moveNext()) {
     var content = $await(read(src, content));
     console.log("内容读取成功");
     $await(write(target, content));
-    console.log("内容读取成功");
+    console.log("内容写入成功");
 } catch (ex) {
     $await(submitError(ex));
     console.log("错误提交成功");
