@@ -4,7 +4,7 @@
   <title><![CDATA[Wind.js]]></title>
   <link href="http://windjs.org/cn/atom.xml" rel="self"/>
   <link href="http://windjs.org/cn/"/>
-  <updated>2012-08-13T21:21:34+08:00</updated>
+  <updated>2012-08-13T22:55:15+08:00</updated>
   <id>http://windjs.org/cn/</id>
   <author>
     <name><![CDATA[老赵]]></name>
@@ -12,6 +12,62 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Wind.js有奖征文第一期]]></title>
+    <link href="http://windjs.org/cn/blog/2012/08/first-solicit-article-with-award/"/>
+    <updated>2012-08-13T22:41:00+08:00</updated>
+    <id>http://windjs.org/cn/blog/2012/08/first-solicit-article-with-award</id>
+    <content type="html"><![CDATA[<h2>缘起</h2>
+
+<p>作为一个开源项目，社区群众的参与必不可少，Wind.js在这方面做的十分不足。项目发展至今，从代码到所有的文档材料，几乎都是由我一个人完成的。我已经在文档上花费了很大心力，但依然只能写一些最基本的内容，大部分的思考依然只存在与脑海中，这让我倍感无力。而且作为项目的开发者，我也希望可以从更多角度来了解使用者眼中的Wind.js。我知道整个项目的细枝末节，但有些时候我眼里顺理成章的事情，似乎在别人看来并非那么自然。</p>
+
+<p>出于多方面考虑，我决定发起一次有奖征文活动，希望可以借助此次活动加强Wind.js的群众基础，并让互联网上出现更多有关Wind.js的资料，其中优秀的内容也会有机会进入Wind.js官方文档。</p>
+
+<!-- more -->
+
+
+<h2>活动规则</h2>
+
+<p>本次征文活动诚邀Wind.js新老用户参与，要求如下：</p>
+
+<ul>
+<li>载体不限：通过个人博客，或是其他能够在互联网上长期访问的载体发布内容。</li>
+<li>内容不限：可以是入门教程、使用心得、案例介绍、源码评析、意见建议等各类相关内容。</li>
+<li>形式不限：尽管是“征文”，但除文章之外亦可使用PPT等各类文案形式。</li>
+<li>数量不限：一人可以在截止日期前提交多份文章。</li>
+</ul>
+
+
+<p>活动从今天开始，至9月30日结束。完成后请将地址回复于此，亦可通过微博<a href="http://weibo.com/jeffz/">@老赵</a>，所有提交的文章将列于文末。如果您在创作过程中遇到任何疑问，或想要了解任何关于Wind.js的内容，请加入<a href="https://groups.google.com/d/forum/windjs">Wind.js讨论组</a>，或直接<a href="mailto:windjs@googlegroups.com">发送邮件</a>提问或参与讨论。</p>
+
+<h2>评奖方式及奖品</h2>
+
+<p>本次活动会邀请业界专家（3到5名），普通群众，以及我本人共同参与投票计分：</p>
+
+<ul>
+<li>本人：三票，每票10分。</li>
+<li>专家：每人三票，每票5分。</li>
+<li>群众：每人三票，每票1分。</li>
+</ul>
+
+
+<p>本次活动将设三个级别的奖项：</p>
+
+<ul>
+<li>一等奖1名，奖品为价值50元的亚马逊代金券3张。</li>
+<li>二等讲2名，奖品为价值50元的亚马逊代金券2张。</li>
+<li>三等奖5名，奖品为价值50元的亚马逊代金券1张。</li>
+</ul>
+
+
+<p>本次活动奖品由“<a href="http://windjs.org/cn/fund/">Wind.js基金</a>”赞助。奖品亦可换成价格相近的礼品，获奖者可自由决定。</p>
+
+<h2>已提交的内容</h2>
+
+<p>暂无</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Wind.js 0.7.0版本正式发布]]></title>
