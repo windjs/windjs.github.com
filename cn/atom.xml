@@ -4,7 +4,7 @@
   <title><![CDATA[Wind.js]]></title>
   <link href="http://windjs.org/cn/atom.xml" rel="self"/>
   <link href="http://windjs.org/cn/"/>
-  <updated>2012-08-12T23:12:31+08:00</updated>
+  <updated>2012-08-13T08:54:01+08:00</updated>
   <id>http://windjs.org/cn/</id>
   <author>
     <name><![CDATA[老赵]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Wind.js 0.7.0版本正式发布]]></title>
-    <link href="http://windjs.org/cn/blog/2012/07/windjs-0.7.0-released/"/>
-    <updated>2012-07-28T22:01:00+08:00</updated>
-    <id>http://windjs.org/cn/blog/2012/07/windjs-0.7.0-released</id>
+    <link href="http://windjs.org/cn/blog/2012/08/windjs-0.7.0-released/"/>
+    <updated>2012-08-12T23:05:00+08:00</updated>
+    <id>http://windjs.org/cn/blog/2012/08/windjs-0.7.0-released</id>
     <content type="html"><![CDATA[<p>经过<a href="https://github.com/JeffreyZhao/wind/issues?milestone=5&amp;page=1&amp;sort=updated&amp;state=closed">周末整整两天的努力</a>，Wind.js 0.7.0版本终于正式发布了！这次发布最重要的改进，便是类库的名称从Jscex修改为Wind.js，搭建了博客，并启用了新的网站和域名。此外，还修复了一些Bug，添加了更多的单元测试，并吸取了一部分<a href="https://github.com/JeffreyZhao/wind/issues/51">玉伯的建议</a>简化了项目的使用方式。</p>
 
 <!-- more -->
