@@ -145,7 +145,12 @@ var insertEverySecondByWind = eval(Wind.compile("async", function () {
 <pre><code>var Wind = require("wind");
 </code></pre>
 
-<p>如果你在使用浏览器环境，则可以引用wind.js的文件：</p>
+<p>如果你在使用浏览器环境，则可以引用wind-all脚本：</p>
+
+<pre><code>&lt;script src="wind-all-x.y.z.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>或是仅仅引入异步模块所需要的脚本文件：</p>
 
 <pre><code>&lt;script src="wind-core-x.y.z.js"&gt;&lt;/script&gt;
 &lt;script src="wind-compiler-x.y.z.js"&gt;&lt;/script&gt;
@@ -153,7 +158,7 @@ var insertEverySecondByWind = eval(Wind.compile("async", function () {
 &lt;script src="wind-async-x.y.z.js"&gt;&lt;/script&gt;
 </code></pre>
 
-<p>这里, x.y.z为版本号。</p>
+<p>这里x.y.z为版本号。</p>
 
 <h2>Wind.js与其它异步类库相比有什么不同？</h2>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Wind.js]]></title>
   <link href="http://windjs.org/cn/atom.xml" rel="self"/>
   <link href="http://windjs.org/cn/"/>
-  <updated>2012-08-14T21:46:36+08:00</updated>
+  <updated>2012-08-14T23:35:07+08:00</updated>
   <id>http://windjs.org/cn/</id>
   <author>
     <name><![CDATA[老赵]]></name>
@@ -134,6 +134,11 @@
 &lt;script src="wind-compiler-x.y.z.js"&gt;&lt;/script&gt;
 &lt;script src="wind-builderbase-x.y.z.js"&gt;&lt;/script&gt;
 &lt;script src="wind-async-x.y.z.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>甚至更进一步，您只需引入wind-all脚本就可以使用Wind.js的所有功能：</p>
+
+<pre><code>&lt;script src="wind-all-x.y.z.js"&gt;&lt;/script&gt;
 </code></pre>
 
 <p>而对于Node.js环境中，使用Wind.js更只需安装一个包即可：</p>
