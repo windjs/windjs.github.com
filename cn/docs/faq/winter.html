@@ -9,7 +9,7 @@
   <meta name="author" content="老赵">
 
   
-  <meta name="description" content="Wind.js FAQ Wind.js是做什么的 在使用JavaScript之时，一旦涉及http请求、等待时间、IO操作等场景，往往需要使用异步操作。而受JavaScript语言之限，同步写法和异步写法往往差距甚大。请看以下代码： 假若要编写一个函数，向页面中插入10个div元素，写法如下： &hellip;">
+  <meta name="description" content="Wind.js FAQ Wind.js是做什么的？ 在使用JavaScript之时，一旦涉及http请求、等待时间、IO操作等场景，往往需要使用异步操作。而受JavaScript语言之限，同步写法和异步写法往往差距甚大。请看以下代码： 假若要编写一个函数，向页面中插入10个div元素，写法如下 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,14 +84,14 @@
     
   </header>
   
-  <h2>Wind.js是做什么的</h2>
+  <h2>Wind.js是做什么的？</h2>
 
 <p>在使用JavaScript之时，一旦涉及http请求、等待时间、IO操作等场景，往往需要使用异步操作。而受JavaScript语言之限，同步写法和异步写法往往差距甚大。请看以下代码：</p>
 
 <p>假若要编写一个函数，向页面中插入10个div元素，写法如下：</p>
 
 <pre><code>var insert = function () {
-    for(var i = 0; i &lt; 10; i++) {
+    for (var i = 0; i &lt; 10; i++) {
         var div = document.createElement("div");
         document.body.appendChild(div);
     }
@@ -171,7 +171,7 @@ var insertEverySecondByWind = eval(Wind.compile("async", function () {
 
 <p>第一，很遗憾，对于Wind.js而言eval是必要的，而且没有任何已知办法将eval封装起来，因为Wind.js必须要使用者显式调用eval来保证当前的作用域可访问。</p>
 
-<p>第二，当使用AOT编译方式发布时，发布的代码中是没有eval的，eval这样的写法可以保证你的代码无需经过编译（或其他“预处理”方式）即可在任何JavaScript环境中调试。</p>
+<p>第二，在发布至生产环境之前，可以使用预编译消除代码中所有的eval。现在使用eval，可以保证你的代码无需经过编译（或其他“预处理”方式）即可在任何JavaScript环境中调试。</p>
 
 <p>第三，eval is evil实际上是个误区，任何语言特性都有其存在的意义和适用之处。Wind.js中的eval运行次数跟代码规模线性相关，这种程度的使用对于性能影响微乎其微。</p>
 
