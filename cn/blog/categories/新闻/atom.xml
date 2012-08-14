@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 新闻 | Wind.js]]></title>
   <link href="http://windjs.org/cn/blog/categories/新闻/atom.xml" rel="self"/>
   <link href="http://windjs.org/cn/"/>
-  <updated>2012-08-13T22:55:15+08:00</updated>
+  <updated>2012-08-14T10:11:09+08:00</updated>
   <id>http://windjs.org/cn/</id>
   <author>
     <name><![CDATA[老赵]]></name>
@@ -93,7 +93,7 @@
 
 <p>您肯定也已经发现Wind.js新上线官方站点。这个站点使用<a href="http://octopress.org/">Octopress</a>搭建，比旧站点使用的<a href="https://github.com/bevry/docpad">DocPad</a>强大许多。更重要的是，它自带了一个至少在我看来十分美观的皮肤，我将其简单的本地化之后便可以直接用上了，甚至它还附赠一个博客系统，支持使用<a href="http://disqus.com/">Disqus</a>发表评论。这样Wind.js便有了自己的项目博客，发布新闻或是搞各种活动便无需借助<a href="http://blog.zhaojie.me/">我的个人博客</a>，一切都显得正式了许多。</p>
 
-<p>今天我一整天都在进行文案工作，重写<a href="http://windjs.org/cn/docs/">文档首页</a>，并迁移了完整的<a href="http://windjs.org/cn/docs/async/">异步模块代码</a>，将之前的一大篇文档分拆了几个小部分，希望能够进一步方便阅读。</p>
+<p>今天我一整天都在进行文案工作，重写<a href="/docs/">文档首页</a>，并迁移了完整的<a href="/docs/async/">异步模块代码</a>，将之前的一大篇文档分拆了几个小部分，希望能够进一步方便阅读。</p>
 
 <h2>反馈</h2>
 

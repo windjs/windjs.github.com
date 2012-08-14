@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 活动 | Wind.js]]></title>
   <link href="http://windjs.org/cn/blog/categories/活动/atom.xml" rel="self"/>
   <link href="http://windjs.org/cn/"/>
-  <updated>2012-08-13T22:55:15+08:00</updated>
+  <updated>2012-08-14T10:11:09+08:00</updated>
   <id>http://windjs.org/cn/</id>
   <author>
     <name><![CDATA[老赵]]></name>
@@ -65,7 +65,10 @@
 
 <h2>已提交的内容</h2>
 
-<p>暂无</p>
+<ul>
+<li><a href="http://weibo.com/lambsand">@金氧</a>：<a href="http://jinyang.mynah.org/article/dispel-your-windjs%27s-doubts.html">消除你对Wind.js的疑虑</a></li>
+</ul>
+
 ]]></content>
   </entry>
   
