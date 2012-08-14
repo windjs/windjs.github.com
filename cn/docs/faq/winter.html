@@ -113,9 +113,7 @@
 }
 </code></pre>
 
-<p>二者之间逻辑非常相似，但是JS语言的限制导致了它们代码结构有很大差异。而wind.js则是一个用于解决代码书写结构问题的类库。</p>
-
-<p>使用Wind.js实现代码对比如下：</p>
+<p>二者之间逻辑非常相似，但是JavaScript语言的限制导致了它们代码结构有很大差异。而Wind.js则是一个用于解决代码书写结构问题的类库。使用Wind.js实现代码对比如下：</p>
 
 <pre><code>var insert = function () {
     for (var i = 0; i &lt; 10; i++) {
@@ -123,21 +121,21 @@
         document.body.appendChild(div);
     }
 }
-</code></pre>
 
-<pre><code class="no-highlight"><span class="keyword">var</span> insertEverySecondByWind = <span style="background-color:#CCCCCC;"><span class="keyword">eval</span>(Wind.compile(<span class="string">"async"</span>,</span> <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
-    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {
-        <span style="background-color:#CCCCCC;"><span class="variable">$await</span>(Wind.Async.sleep(<span class="number">1000</span>));</span>
-        <span class="keyword">var</span> div = document.createElement(<span class="string">"div"</span>);
+var insertEverySecondByWind = eval(Wind.compile("async", function () {
+    for (var i = 0; i &lt; 10; i++) {
+        $await(Wind.Async.sleep(1000));
+        var div = document.createElement("div");
         document.body.appendChild(div);
     }
-}
+}));
 </code></pre>
 
+<p>可见除了定义方法时多了一部分“框架代码”，代码整体逻辑结构与之前可谓如出一辙，而“暂停”功能即可通过Wind.js异步模块中的<code>$await</code>操作配合<code>sleep</code>方法来实现。</p>
 
 <h2>如何搭建Wind.js运行环境？</h2>
 
-<p>如果你在使用支持npm的环境（如nodejs），可以直接安装npm包：</p>
+<p>如果你在使用支持npm的环境（如Node.js），可以直接安装npm包：</p>
 
 <pre><code>npm install wind
 </code></pre>
