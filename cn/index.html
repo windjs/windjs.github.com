@@ -9,7 +9,7 @@
   <meta name="author" content="老赵">
 
   
-  <meta name="description" content="缘起 作为一个开源项目，社区群众的参与必不可少，Wind.js在这方面做的十分不足。项目发展至今，从代码到所有的文档材料，几乎都是由我一个人完成的。我已经在文档上花费了很大心力，但依然只能写一些最基本的内容，大部分的思考依然只存在与脑海中，这让我倍感无力。而且作为项目的开发者， &hellip;">
+  <meta name="description" content="Wind.js在推广过程中遇到的最大的问题之一便是众人对eval的反对，许多人见到Wind.js代码中需要显示调用eval便新生惧意，敬而远之。其中对于eval最大的质疑便是其性能问题，尽管Wind.js提供了预编译器，但还是有个别专家强烈反对Wind.js中的eval使用方式， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/cn/blog/2012/08/jit-aot-benchmark/">代码预编译前后性能对比</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-16T22:28:00+08:00" pubdate data-updated="true">2012-08-16</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Wind.js在推广过程中遇到的最大的问题之一便是众人对<code>eval</code>的反对，许多人见到Wind.js代码中需要显示调用<code>eval</code>便新生惧意，敬而远之。其中对于<code>eval</code>最大的质疑便是其性能问题，尽管Wind.js提供了<a href="/cn/docs/aot/">预编译器</a>，但还是有个别专家强烈反对Wind.js中的<code>eval</code>使用方式，认为它会严重降低程序性能，以至于在“开发模式”中都不该出现<code>eval</code>。</p>
+
+<p>为此我进行了<a href="http://blog.zhaojie.me/2012/08/js-code-from-eval-benchmark.html">一次简单的性能对比</a>，从结果上看似乎由<code>eval</code>生成的代码与直接定义的代码在性能上几乎完全相同，但是<a href="http://www.otakustay.com/eval-performance-profile/">也有证据显示</a>，<code>eval</code>会对代码整体性能产生负面影响，甚至只需要在代码中出现<code>eval</code>而根本无需执行。由于JavaScript引擎的实现各不相同，优化手段也十分复杂，甚至是一个黑盒（即便开源也很难分析完整），因此要完整得到<code>eval</code>等特定功能对于性能的影响是件难度极大的事情，甚至由于变化太多，即便得出结论其参考价值也十分有限。为此，我还是打算以性能比较的方式来尝试说明“特定条件”下的情况。</p>
+
+<p>这次的性能对比，便是要对比一份使用了Wind.js的代码，在预编译前后的性能差距。由于<code>eval</code>在Wind.js中的使用方式十分单一，毫无变化，因此这次实验对于实际情况下的Wind.js使用还是具有一定参考价值的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/cn/blog/2012/08/jit-aot-benchmark/">阅读全文 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -221,6 +266,10 @@
     <section>
   <h1>最新博客</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/cn/blog/2012/08/jit-aot-benchmark/">代码预编译前后性能对比</a>
+      </li>
     
       <li class="post">
         <a href="/cn/blog/2012/08/first-solicit-article-with-award/">Wind.js有奖征文第一期</a>

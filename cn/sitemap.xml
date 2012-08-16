@@ -13,8 +13,12 @@
         <lastmod>2012-08-14T10:07:41+08:00</lastmod>
     </url>
     <url>
+        <loc>http://windjs.org/cn/blog/2012/08/jit-aot-benchmark/</loc>
+        <lastmod>2012-08-16T22:36:29+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://windjs.org/cn/blog/archives/</loc>
-        <lastmod>2012-08-14T23:46:03+08:00</lastmod>
+        <lastmod>2012-08-16T22:36:29+08:00</lastmod>
     </url>
     <url>
         <loc>http://windjs.org/cn/docs/async/await.html</loc>
@@ -84,6 +88,6 @@
     </url>
     <url>
         <loc>http://windjs.org/cn/</loc>
-        <lastmod>2012-08-14T23:32:57+08:00</lastmod>
+        <lastmod>2012-08-16T22:36:29+08:00</lastmod>
     </url>
 </urlset>
