@@ -4,7 +4,7 @@
   <title><![CDATA[分类：性能 | Wind.js]]></title>
   <link href="http://windjs.org/cn/blog/categories/性能/atom.xml" rel="self"/>
   <link href="http://windjs.org/cn/"/>
-  <updated>2012-08-16T22:37:03+08:00</updated>
+  <updated>2012-08-17T00:46:41+08:00</updated>
   <id>http://windjs.org/cn/</id>
   <author>
     <name><![CDATA[老赵]]></name>
@@ -159,7 +159,7 @@ for (var round = 0; round &lt; 3; round++) {
 
 <p>从结果中可以看出，对于Node.js和Chrome来说，预编译前后的性能相差不多，有时甚至<code>eval</code>的代码性能会略快一些，这点在Chrome浏览器里表现尤其明显，我重复了多次实验，无论先执行哪段代码都是预编译后的代码速度稍慢，令人甚是不解。而在Safari和Firefox中，由<code>eval</code>得到的代码耗时会比预编译后的代码长约50%，可见预编译对于这两个浏览器上的确可以带来一定性能提升。</p>
 
-<p>说句题外话，单比预编译后的代码，会发现Safari和Firefox浏览器的JavaScript引擎效率高于一直以“高性能”著称的V8引擎。综合之前的测试，似乎我们可以得出“浮点数运算V8更好，单普通的JavaScript代码是其他主流浏览器更快的结论”。</p>
+<p>说句题外话，单比预编译后的代码，会发现Safari和Firefox浏览器的JavaScript引擎效率高于一直以“高性能”著称的V8引擎。综合之前的测试，似乎我们可以得出“浮点数运算V8更好，单普通的JavaScript代码是其他主流浏览器更快”这样的结论。</p>
 
 <h2>总结</h2>
 
