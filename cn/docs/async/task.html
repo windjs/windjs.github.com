@@ -15,7 +15,7 @@ $await指令
 任务模型
 取消模型
 绑定其他异步模型
-辅助方法 任务模型 $await指令的参数是Wind.Async.Task类型的对象，这个对象这个对象可以是一个异步方法的返回结果，或是由其他任何方式得到。 &hellip;">
+辅助方法 任务模型 $await指令的参数是Wind.Async.Task类型的对象，这个对象可以是一个异步方法的返回结果，或是由其他任何方式得到。在Wind &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,7 +106,7 @@ $await指令
 
 <h2>任务模型</h2>
 
-<p><code>$await</code>指令的参数是<code>Wind.Async.Task</code>类型的对象，这个对象这个对象可以是一个异步方法的返回结果，或是由其他任何方式得到。在Wind.js异步模块眼中，一个异步任务便是指“<strong>能在未来某个时刻返回的操作</strong>”，它可以是一个<code>setTimeout</code>的绑定（如之前演示过的<code>sleep</code>方法），甚至是一个用户事件：</p>
+<p><code>$await</code>指令的参数是<code>Wind.Async.Task</code>类型的对象，这个对象可以是一个异步方法的返回结果，或是由其他任何方式得到。在Wind.js异步模块眼中，一个异步任务便是指“<strong>能在未来某个时刻返回的操作</strong>”，它可以是一个<code>setTimeout</code>的绑定（如之前演示过的<code>sleep</code>方法），甚至是一个用户事件：</p>
 
 <pre><code>var btnNext = document.getElementById("btnNext");
 var ev = $await(Wind.Async.onEvent(btnNext, "click"));
