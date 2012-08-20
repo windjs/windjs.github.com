@@ -17,6 +17,10 @@
         <lastmod>2012-08-17T00:42:18+08:00</lastmod>
     </url>
     <url>
+        <loc>http://windjs.org/cn/abc.html</loc>
+        <lastmod>2012-08-20T11:25:23+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://windjs.org/cn/blog/archives/</loc>
         <lastmod>2012-08-17T00:42:18+08:00</lastmod>
     </url>
@@ -76,7 +80,7 @@
     </url>
     <url>
         <loc>http://windjs.org/cn/docs/</loc>
-        <lastmod>2012-08-17T00:46:28+08:00</lastmod>
+        <lastmod>2012-08-20T11:55:16+08:00</lastmod>
     </url>
     <url>
         <loc>http://windjs.org/cn/docs/promise/</loc>
