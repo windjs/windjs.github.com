@@ -4,7 +4,7 @@
   <title><![CDATA[分类：性能 | Wind.js]]></title>
   <link href="http://windjs.org/cn/blog/categories/性能/atom.xml" rel="self"/>
   <link href="http://windjs.org/cn/"/>
-  <updated>2012-08-20T11:58:44+08:00</updated>
+  <updated>2012-08-22T00:21:49+08:00</updated>
   <id>http://windjs.org/cn/</id>
   <author>
     <name><![CDATA[老赵]]></name>
@@ -18,7 +18,7 @@
     <link href="http://windjs.org/cn/blog/2012/08/jit-aot-benchmark/"/>
     <updated>2012-08-16T22:28:00+08:00</updated>
     <id>http://windjs.org/cn/blog/2012/08/jit-aot-benchmark</id>
-    <content type="html"><![CDATA[<p>Wind.js在推广过程中遇到的最大的问题之一便是众人对<code>eval</code>的反对，许多人见到Wind.js代码中需要显示调用<code>eval</code>便新生惧意，敬而远之。其中对于<code>eval</code>最大的质疑便是其性能问题，尽管Wind.js提供了<a href="/docs/aot/">预编译器</a>，但还是有个别专家强烈反对Wind.js中的<code>eval</code>使用方式，认为它会严重降低程序性能，以至于在“开发模式”中都不该出现<code>eval</code>。</p>
+    <content type="html"><![CDATA[<p>Wind.js在推广过程中遇到的最大的问题之一便是众人对<code>eval</code>的反对，许多人见到Wind.js代码中需要显示调用<code>eval</code>便心生惧意，敬而远之。其中对于<code>eval</code>最大的质疑便是其性能问题，尽管Wind.js提供了<a href="/docs/aot/">预编译器</a>，但还是有个别专家强烈反对Wind.js中的<code>eval</code>使用方式，认为它会严重降低程序性能，以至于在“开发模式”中都不该出现<code>eval</code>。</p>
 
 <p>为此我进行了<a href="http://blog.zhaojie.me/2012/08/js-code-from-eval-benchmark.html">一次简单的性能对比</a>，从结果上看似乎由<code>eval</code>生成的代码与直接定义的代码在性能上几乎完全相同，但是<a href="http://www.otakustay.com/eval-performance-profile/">也有证据显示</a>，<code>eval</code>会对代码整体性能产生负面影响，甚至只需要在代码中出现<code>eval</code>而根本无需执行。由于JavaScript引擎的实现各不相同，优化手段也十分复杂，甚至是一个黑盒（即便开源也很难分析完整），因此要完整得到<code>eval</code>等特定功能对于性能的影响是件难度极大的事情，甚至由于变化太多，即便得出结论其参考价值也十分有限。为此，我还是打算以性能比较的方式来尝试说明“特定条件”下的情况。</p>
 
@@ -159,7 +159,7 @@ for (var round = 0; round &lt; 3; round++) {
 
 <p>从结果中可以看出，对于Node.js和Chrome来说，预编译前后的性能相差不多，有时甚至<code>eval</code>的代码性能会略快一些，这点在Chrome浏览器里表现尤其明显，我重复了多次实验，无论先执行哪段代码都是预编译后的代码速度稍慢，令人甚是不解。而在Safari和Firefox中，由<code>eval</code>得到的代码耗时会比预编译后的代码长约50%，可见预编译对于这两个浏览器上的确可以带来一定性能提升。</p>
 
-<p>说句题外话，单比预编译后的代码，会发现Safari和Firefox浏览器的JavaScript引擎效率高于一直以“高性能”著称的V8引擎。综合之前的测试，似乎我们可以得出“浮点数运算V8更好，单普通的JavaScript代码是其他主流浏览器更快”这样的结论。</p>
+<p>说句题外话，单比预编译后的代码，会发现Safari和Firefox浏览器的JavaScript引擎效率高于一直以“高性能”著称的V8引擎。综合之前的测试，似乎我们可以得出“浮点数运算V8更好，但普通的JavaScript代码是其他主流浏览器更快”这样的结论。</p>
 
 <h2>总结</h2>
 

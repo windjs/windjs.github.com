@@ -107,7 +107,7 @@ var swap = function (a, i, j) {
 
 var bubbleSort = function (array) {
     for (var i = 0; i &lt; array.length; i++) {
-        for (var j = 0; j &lt; array.length - j - 1; j++) {
+        for (var j = 0; j &lt; array.length - i - 1; j++) {
             if (compare(array[j], array[j + 1]) &gt; 0) {
                 swap(array, j, j + 1);
             }
