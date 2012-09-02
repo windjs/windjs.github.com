@@ -4,7 +4,7 @@
   <title><![CDATA[分类：eval | Wind.js]]></title>
   <link href="http://windjs.org/cn/blog/categories/eval/atom.xml" rel="self"/>
   <link href="http://windjs.org/cn/"/>
-  <updated>2012-09-02T18:38:27+08:00</updated>
+  <updated>2012-09-02T18:53:55+08:00</updated>
   <id>http://windjs.org/cn/</id>
   <author>
     <name><![CDATA[老赵]]></name>
@@ -123,7 +123,7 @@ var printHello = function () {
 
 <p>换句话说，只要Wind.js方法内部还会继续使用上下文的成员，则无可避免需要我们在代码里使用<code>eval</code>。不过换句话说，只要能够保证方法内部不会用到上下文，则<code>eval</code>函数的调用就可以被隐藏起来，甚至可以使用<code>new Function()</code>来代替。只可惜Wind.js不能给使用者做出这样的限制，但如果有其他组件可以提供这样的约束，便可以让用户摆脱对<code>eval</code>的直接依赖。</p>
 
-<p>例如<a href="http://seajs.org/docs/">SeaJS</a>。因为在SeaJS中，每个模块都可以认为是独立存在，而不需要依赖上下文的单元。</p>
+<p>例如<a href="http://seajs.org/docs/">SeaJS</a>。因为在SeaJS中，每个模块都可以认为是独立存在的单元，从而不需要依赖上下文。</p>
 ]]></content>
   </entry>
   
