@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Wind.js有奖征文第一期 - Wind.js</title>
+  <title>无法封装的函数：eval - Wind.js</title>
   <meta name="author" content="老赵">
 
   
-  <meta name="description" content="缘起 作为一个开源项目，社区群众的参与必不可少，Wind.js在这方面做的十分不足。项目发展至今，从代码到所有的文档材料，几乎都是由我一个人完成的。我已经在文档上花费了很大心力，但依然只能写一些最基本的内容，大部分的思考依然只存在与脑海中，这让我倍感无力。而且作为项目的开发者， &hellip;">
+  <meta name="description" content="从Wind.js诞生之日起就依赖eval实现了运行时的代码转化，但也不断引起许多人对Wind.js的误解。许多人一看到eval便对Wind.js敬而远之，但可能他们一直在使用的组件或是应用便大量运用了eval。还有人抱怨Wind.js的方法定义方式太冗余，假如eval(Wind.compile &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://windjs.org/cn/blog/2012/08/first-solicit-article-with-award/">
+  <link rel="canonical" href="http://windjs.org/cn/blog/2012/09/eval-the-method-cannot-be-encapsulated/">
   <link href="/cn/favicon.png" rel="icon">
   <link href="/cn/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/cn/javascripts/modernizr-2.0.js"></script>
@@ -79,7 +79,7 @@
   
   <header>
     
-      <h1 class="entry-title">Wind.js有奖征文第一期</h1>
+      <h1 class="entry-title">无法封装的函数：eval</h1>
     
     
       <p class="meta">
@@ -95,66 +95,119 @@
   
 
 
-<time datetime="2012-08-13T22:41:00+08:00" pubdate data-updated="true">2012-08-13</time>
+<time datetime="2012-09-02T18:37:00+08:00" pubdate data-updated="true">2012-09-02</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>缘起</h2>
-
-<p>作为一个开源项目，社区群众的参与必不可少，Wind.js在这方面做的十分不足。项目发展至今，从代码到所有的文档材料，几乎都是由我一个人完成的。我已经在文档上花费了很大心力，但依然只能写一些最基本的内容，大部分的思考依然只存在与脑海中，这让我倍感无力。而且作为项目的开发者，我也希望可以从更多角度来了解使用者眼中的Wind.js。我知道整个项目的细枝末节，但有些时候我眼里顺理成章的事情，似乎在别人看来并非那么自然。</p>
-
-<p>出于多方面考虑，我决定发起一次有奖征文活动，希望可以借助此次活动加强Wind.js的群众基础，并让互联网上出现更多有关Wind.js的资料，其中优秀的内容也会有机会进入Wind.js官方文档。</p>
+<div class="entry-content"><p>从Wind.js诞生之日起就依赖<code>eval</code>实现了运行时的代码转化，但也不断引起许多人对Wind.js的误解。许多人一看到<code>eval</code>便对Wind.js敬而远之，但可能他们一直在使用的组件或是应用便大量运用了<code>eval</code>。还有人抱怨Wind.js的方法定义方式太冗余，假如<code>eval(Wind.compile(...))</code>可以进一步简化即可。其实这两个问题的解决方法都是一种：将<code>eval</code>封装起来，只在类库内部使用。只可惜我们无法做到这一点。</p>
 
 <!-- more -->
 
 
-<h2>活动规则</h2>
+<p><code>eval</code>是个特殊的函数，它的作用是动态执行代码。JavaScript的代码在执行时不是一个人在战斗，而是要结合上下文才能得到真正的执行结果。例如同样一句<code>eval("i")</code>，在不同的上下文中将会得到不同的结果：</p>
 
-<p>本次征文活动诚邀Wind.js新老用户参与，要求如下：</p>
+<pre><code>(function () {
 
-<ul>
-<li>载体不限：通过个人博客，或是其他能够在互联网上长期访问的载体发布内容。</li>
-<li>内容不限：可以是入门教程、使用心得、案例介绍、源码评析、意见建议等各类相关内容。</li>
-<li>形式不限：尽管是“征文”，但除文章之外亦可使用PPT等各类文案形式。</li>
-<li>数量不限：一人可以在截止日期前提交多份文章。</li>
-</ul>
+    var i = 0;
+    console.log(eval("i")); // 0
 
+})();
 
-<p>活动从今天开始，至9月30日结束。完成后请将地址回复于此，亦可通过微博<a href="http://weibo.com/jeffz/">@老赵</a>，所有提交的文章将列于文末。如果您在创作过程中遇到任何疑问，或想要了解任何关于Wind.js的内容，请加入<a href="https://groups.google.com/d/forum/windjs">Wind.js讨论组</a>，或直接<a href="mailto:windjs@googlegroups.com">发送邮件</a>提问或参与讨论。</p>
+(function () {
 
-<h2>评奖方式及奖品</h2>
+    var i = 1;
+    console.log(eval("i")); // 1
 
-<p>本次活动会邀请业界专家（3到5名），普通群众，以及我本人共同参与投票计分：</p>
+})();
+</code></pre>
 
-<ul>
-<li>本人：三票，每票10分。</li>
-<li>专家：每人三票，每票5分。</li>
-<li>群众：每人三票，每票1分。</li>
-</ul>
+<p>也正因为如此，在Wind.js中我们无法封装<code>eval</code>函数，因为我们无法避免一个Wind.js方法使用外部的上下文，例如：</p>
 
+<pre><code>(function () {
 
-<p>本次活动将设三个级别的奖项：</p>
+    var hello = "world";
 
-<ul>
-<li>一等奖1名，奖品为价值50元的亚马逊代金券3张。</li>
-<li>二等讲2名，奖品为价值50元的亚马逊代金券2张。</li>
-<li>三等奖5名，奖品为价值50元的亚马逊代金券1张。</li>
-</ul>
+    var printHello = eval(Wind.compile("async", function () {
+        console.log(hello);
+    }));
 
+})();
+</code></pre>
 
-<p>本次活动奖品由“<a href="/cn/fund/">Wind.js基金</a>”赞助。奖品亦可换成价格相近的礼品，获奖者可自由决定。</p>
+<p>请注意这个<code>hello</code>变量处于方法外部，我们期望它的效果等价于：</p>
 
-<h2>已提交的内容</h2>
+<pre><code>var hello = "world";
 
-<ul>
-<li><a href="http://weibo.com/lambsand">@金氧</a>：<a href="http://jinyang.mynah.org/article/dispel-your-windjs%27s-doubts.html">消除你对Wind.js的疑虑</a></li>
-<li><a href="http://weibo.com/greatony">@黄珏珅Tony</a>：<a href="http://www.greatony.com/?p=195">Wind.js: An elegant approach to asynchronies JavaScript</a></li>
-<li><a href="http://weibo.com/sunleepy">@sunleepy</a>：<a href="http://www.cnblogs.com/liping13599168/archive/2012/09/02/windjs-phonegap.html">Wind.js在移动跨平台框架PhoneGap中的异步体验</a></li>
-</ul>
+var printHello = function () {
+   ...
+   console.log(hello);
+   ...
+}
+</code></pre>
 
+<p>这也是现在的<code>eval</code>的效果，但是假如我们将eval封装至Wind.compile内部，则会近似成为：</p>
+
+<pre><code>Wind.compile = function () {
+    var code = "(function () {" +
+        /* ... */
+        "console.log(hello);" +
+        /* ... */
+    "})"
+
+    return eval(code);
+}
+</code></pre>
+
+<p>此时字符串中函数则会使用<code>Wind.compile</code>内部当前的上下文，自然也已经找不到<code>hello</code>，即便有也很可能不是我们所需要的那个。
+如果您对于<code>eval</code>为何无法封装有所疑惑的话，不妨<a href="http://jsfiddle.net/jeffz/Gdyb2/">执行以下代码</a>便会一目了然：</p>
+
+<pre><code>(function () {
+
+    var getCode = function (f) {
+        return "(" + f.toString() + ")";
+    }
+
+    var getEvaledCode = function (f) {
+        return eval(getCode(f));
+    };
+
+    var test1 = function () {
+        var i = 0;
+        var f = eval(getCode(function () {
+            console.log("i = " + i);
+        }));
+
+        f();
+    };
+
+    var test2 = function () {
+        var i = 0;
+        var f = getEvaledCode(function () {
+            console.log("i = " + i);
+        });
+
+        f();
+    };
+
+    // 输出“i = 0”
+    test1();
+
+    // 输出“i is not defined”
+    try {
+        test2();
+    } catch (ex) {
+        console.log(ex);
+    }
+
+})();
+</code></pre>
+
+<p>换句话说，只要Wind.js方法内部还会继续使用上下文的成员，则无可避免需要我们在代码里使用<code>eval</code>。不过换句话说，只要能够保证方法内部不会用到上下文，则<code>eval</code>函数的调用就可以被隐藏起来，甚至可以使用<code>new Function()</code>来代替。只可惜Wind.js不能给使用者做出这样的限制，但如果有其他组件可以提供这样的约束，便可以让用户摆脱对<code>eval</code>的直接依赖。</p>
+
+<p>例如<a href="http://seajs.org/docs/">SeaJS</a>。因为在SeaJS中，每个模块都可以认为是独立存在，而不需要依赖上下文的单元。</p>
 </div>
 
 
@@ -177,12 +230,12 @@
   
 
 
-<time datetime="2012-08-13T22:41:00+08:00" pubdate data-updated="true">2012-08-13</time>
+<time datetime="2012-09-02T18:37:00+08:00" pubdate data-updated="true">2012-09-02</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/cn/blog/categories/活动/'>活动</a>
+    <a class='category' href='/cn/blog/categories/eval/'>eval</a>
   
 </span>
 
@@ -191,10 +244,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/cn/blog/2012/08/windjs-0.7.0-released/" title="上一篇: Wind.js 0.7.0版本正式发布">&laquo; Wind.js 0.7.0版本正式发布</a>
+        <a class="basic-alignment left" href="/cn/blog/2012/08/jit-aot-benchmark/" title="上一篇: 代码预编译前后性能对比">&laquo; 代码预编译前后性能对比</a>
       
-      
-        <a class="basic-alignment right" href="/cn/blog/2012/08/jit-aot-benchmark/" title="下一篇: 代码预编译前后性能对比">代码预编译前后性能对比 &raquo;</a>
       
     </p>
   </footer>
@@ -261,8 +312,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://windjs.org/cn/blog/2012/08/first-solicit-article-with-award/';
-        var disqus_url = 'http://windjs.org/cn/blog/2012/08/first-solicit-article-with-award/';
+        var disqus_identifier = 'http://windjs.org/cn/blog/2012/09/eval-the-method-cannot-be-encapsulated/';
+        var disqus_url = 'http://windjs.org/cn/blog/2012/09/eval-the-method-cannot-be-encapsulated/';
         var disqus_script = 'embed.js';
       
     (function () {

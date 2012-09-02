@@ -9,7 +9,7 @@
   <meta name="author" content="老赵">
 
   
-  <meta name="description" content="Wind.js在推广过程中遇到的最大的问题之一便是众人对eval的反对，许多人见到Wind.js代码中需要显示调用eval便心生惧意，敬而远之。其中对于eval最大的质疑便是其性能问题，尽管Wind.js提供了预编译器，但还是有个别专家强烈反对Wind.js中的eval使用方式， &hellip;">
+  <meta name="description" content="从Wind.js诞生之日起就依赖eval实现了运行时的代码转化，但也不断引起许多人对Wind.js的误解。许多人一看到eval便对Wind.js敬而远之，但可能他们一直在使用的组件或是应用便大量运用了eval。还有人抱怨Wind.js的方法定义方式太冗余，假如eval(Wind.compile &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/cn/blog/2012/09/eval-the-method-cannot-be-encapsulated/">无法封装的函数：eval</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-02T18:37:00+08:00" pubdate data-updated="true">2012-09-02</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>从Wind.js诞生之日起就依赖<code>eval</code>实现了运行时的代码转化，但也不断引起许多人对Wind.js的误解。许多人一看到<code>eval</code>便对Wind.js敬而远之，但可能他们一直在使用的组件或是应用便大量运用了<code>eval</code>。还有人抱怨Wind.js的方法定义方式太冗余，假如<code>eval(Wind.compile(...))</code>可以进一步简化即可。其实这两个问题的解决方法都是一种：将<code>eval</code>封装起来，只在类库内部使用。只可惜我们无法做到这一点。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/cn/blog/2012/09/eval-the-method-cannot-be-encapsulated/">阅读全文 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -264,6 +305,10 @@
     <section>
   <h1>最新博客</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/cn/blog/2012/09/eval-the-method-cannot-be-encapsulated/">无法封装的函数：eval</a>
+      </li>
     
       <li class="post">
         <a href="/cn/blog/2012/08/jit-aot-benchmark/">代码预编译前后性能对比</a>
