@@ -4,7 +4,7 @@
   <title><![CDATA[Wind.js]]></title>
   <link href="http://windjs.org/cn/atom.xml" rel="self"/>
   <link href="http://windjs.org/cn/"/>
-  <updated>2012-10-18T22:34:19+08:00</updated>
+  <updated>2012-10-30T23:15:16+08:00</updated>
   <id>http://windjs.org/cn/</id>
   <author>
     <name><![CDATA[老赵]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Wind.js有奖征文第一期结果出炉]]></title>
+    <link href="http://windjs.org/cn/blog/2012/10/first-solicit-article-with-award-result/"/>
+    <updated>2012-10-30T23:20:00+08:00</updated>
+    <id>http://windjs.org/cn/blog/2012/10/first-solicit-article-with-award-result</id>
+    <content type="html"><![CDATA[<p>最近一个多月工作很忙，再加上之前参加了太多活动导致精神不振，因此这段时间一直在看书和修整，接下来要重新投入战斗了。两个多月前发起了第一期Wind.js有奖征文活动，但由于参与人数有限，最终只收到了6篇文章，于是也不麻烦专家和社区群众进行投票了。假如您对于最后的结果有任何意见请尽管提出。</p>
+
+<!-- more -->
+
+
+<h2>获奖文章</h2>
+
+<p><strong>一等奖</strong></p>
+
+<p><a href="http://blogs.shaunxu.me/archive/2012/10/16/node.js-adventure---when-node-flying-in-wind.aspx">Node.js Adventure - When Node Flying in Wind</a> by <a href="http://weibo.com/ziyanxu">@老羊肖恩</a></p>
+
+<p>总有一些文章会让我看了充满动力，这篇文章也一样。这篇文章详细地讲解了如何在Node.js环境中使用Wind.js辅助开发，为了这样的支持者我也必须要继续坚持，不是么？</p>
+
+<p><strong>二等奖</strong></p>
+
+<p><a href="http://www.greatony.com/?p=195">Wind.js: An elegant approach to asynchronies JavaScript</a> by <a href="http://weibo.com/greatony">@黄珏珅Tony</a></p>
+
+<p>这也是一篇在Node.js中使用Wind.js的使用案例，Tony同学当时很主动地联系我写文章，并且在自己的项目中使用Wind.js，令人鼓舞。</p>
+
+<p><a href="http://tech.weibo.com/?p=1819">在BerserkJS中无缝使用Wind.js收拢异步执行流程</a> by <a href="http://weibo.com/itapir">@貘吃馍香</a></p>
+
+<p>在我去新浪分享了Wind.js的话题之后，貘大立即表现出对Wind.js的兴趣，并且很快就配合BersekJS进行前端页面性能分析。那么，Wind.js是否也算是在新浪微博开发中起到了一定作用呢？</p>
+
+<p><strong>三等奖</strong></p>
+
+<p><a href="http://jinyang.mynah.org/article/dispel-your-windjs%27s-doubts.html">消除你对Wind.js的疑虑</a> by <a href="http://weibo.com/lambsand">@金氧</a></p>
+
+<p><a href="http://www.cnblogs.com/liping13599168/archive/2012/09/02/windjs-phonegap.html">Wind.js在移动跨平台框架PhoneGap中的异步体验</a> by <a href="http://weibo.com/sunleepy">@sunleepy</a></p>
+
+<p><a href="http://jimliu.net/?p=191">JavaScript中的异步梳理（3）——使用Wind.js</a> by <a href="http://weibo.com/jimnox">@刘骥-JimLiu</a></p>
+
+<p>同样感谢以上三位同学对Wind.js做出的贡献。</p>
+
+<h2>奖品</h2>
+
+<p>奖品如下，获奖同学将于近期收到本人的骚扰：</p>
+
+<ul>
+<li>一等奖：价值50元的亚马逊代金券3张。</li>
+<li>二等讲：价值50元的亚马逊代金券2张。</li>
+<li>三等奖：价值50元的亚马逊代金券1张。</li>
+</ul>
+
+
+<p>每位同学还能获得图灵公司的书籍一本，再此感谢图灵对这次征文活动的支持！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[无法封装的函数：eval]]></title>
